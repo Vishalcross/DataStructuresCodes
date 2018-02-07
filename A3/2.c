@@ -1,49 +1,50 @@
 #include<stdio.h>
-#include<string.h>
-int merge(int n, int l, int r, int arr[n], int left[l], int right[r]) {
-    int i = 0, j = 0, count = 0;
-    while (i < l || j < r) {
-        if (i == l) {
-            arr[i+j] = right[j];
-            j++;
+void mergeSort(int n, int *a, int* count){
+    if(n<=1) return;
+    int mid = n/2;
+    //splitting
+    mergeSort(mid,a,count);
+    mergeSort(n-mid,a+mid,count);
+    //merging
+    int* l = a;
+    int* r = a+mid;
+    int temp[n],index=0;
+    while(l<a+mid && r<a+n){
+        if(*l < *r){
+            temp[index++] = *l;
+            l++;
         }
-        else if (j == r) {
-            arr[i+j] = left[i];
-            i++;
-        }
-        else if (left[i] <= right[j]) {
-            arr[i+j] = left[i];
-            i++;
-        }
-        else {
-            arr[i+j] = right[j];
-            count += l-i;
-            j++;
+        else{
+            int* x = l;
+            while(x<a+mid){
+                printf("%d %d is inversion\n",*x,*r);
+                (*count)++;
+                x++;
+            }
+            temp[index++] = *r;
+            r++;
         }
     }
-    return count;
-}
-
-int invCount(int n, int arr[n]) {
-    if (n < 2)
-        return 0;
-
-    int m = (n + 1) / 2;
-    int left[m];
-    memset(left,0,sizeof(left));
-    for(int i=0;i<m;i++) left[i] = arr[i];
-    int right[n-m];
-    memset(right,0,sizeof(right));
-    for(int i=m;i<n;i++) right[i-m] = arr[i];
-
-    return invCount(m,left) + invCount(n-m,right) + merge(n,m,n-m,arr, left, right);
+    while(l<a+mid && index<n){
+        temp[index++] = *l;
+        l++;
+    }
+    while(r<a+n && index<n){
+        temp[index++] = *r;
+        r++;
+    }
+    for(int i=0;i<n;i++) a[i] = temp[i];
 }
 int main(){
+    printf("Enter the array size: ");
     int n;
     scanf("%d",&n);
-    int arr[n];
-    for(int i=0;i<n;i++) scanf("%d",&arr[i]);
-    int  count = invCount(n,arr);
-    printf("%d",count);
+    int a[n],count=0;
+    printf("Enter the data of the array: ");
+    for(int i=0;i<n;i++) scanf("%d",&a[i]);
+    mergeSort(n,a,&count);
+    printf("The sorted array is: ");
+    for(int i=0;i<n;i++) printf("%d ",a[i]);
+    printf("\ncount = %d",count);
     return 0;
 }
