@@ -10,12 +10,21 @@ int main(){
     char correct[n][100];
     memset(correct,0,sizeof(correct));
     for(int i=0;i<n;i++){
-        int j=0;
+        int j=0,flag=0;
         for(j=0;j<strlen(num[i]);j++){
             if(num[i][j] != '0'){
-                break;
+                flag = 1;
             }
         }
+        j=0;
+        if(flag == 1){
+            for(j=0;j<strlen(num[i]);j++){
+                if(num[i][j] != '0'){
+                    break;
+                }
+            }
+        }
+
         int l=0;
         for(int k=j;k<strlen(num[i]);k++) correct[i][l++] = num[i][k];
     }
@@ -23,21 +32,52 @@ int main(){
     memset(num,0,sizeof(num));
     for(int i=0;i<n-1;i++){
         for(int j=i+1;j<n;j++){
-            if(strlen(correct[i]) > strlen(correct[j]) ){
-                printf("Size difference %s is bigger than %s\n",correct[i],correct[j]);
-                char temp[100];
-                strcpy(temp,correct[i]);
-                strcpy(correct[i],correct[j]);
-                strcpy(correct[j],temp);
-            }
-            else if(strlen(correct[i]) == strlen(correct[j]) ){
-                if(strcmp(correct[i],correct[j]) > 0){
-                    printf("%s is bigger than %s\n",correct[i],correct[j]);
+            if(correct[i][0] != '-' && correct[j][0] != '-'){
+                if(strlen(correct[i]) > strlen(correct[j]) ){
+                    printf("Size difference %s is bigger than %s\n",correct[i],correct[j]);
                     char temp[100];
                     strcpy(temp,correct[i]);
                     strcpy(correct[i],correct[j]);
                     strcpy(correct[j],temp);
                 }
+                else if(strlen(correct[i]) == strlen(correct[j]) ){
+                    if(strcmp(correct[i],correct[j]) > 0){
+                        printf("%s is bigger than %s\n",correct[i],correct[j]);
+                        char temp[100];
+                        strcpy(temp,correct[i]);
+                        strcpy(correct[i],correct[j]);
+                        strcpy(correct[j],temp);
+                    }
+                }
+            }
+            else if(correct[i][0] == '-' && correct[j][0] == '-'){
+                if(strlen(correct[i]) < strlen(correct[j]) ){
+                    printf("Size difference %s is bigger than %s\n",correct[i],correct[j]);
+                    char temp[100];
+                    strcpy(temp,correct[i]);
+                    strcpy(correct[i],correct[j]);
+                    strcpy(correct[j],temp);
+                }
+                else if(strlen(correct[i]) == strlen(correct[j]) ){
+                    if(strcmp(correct[i],correct[j]) < 0){
+                        printf("%s is bigger than %s\n",correct[j],correct[i]);
+                        char temp[100];
+                        strcpy(temp,correct[i]);
+                        strcpy(correct[i],correct[j]);
+                        strcpy(correct[j],temp);
+                    }
+                }
+            }
+            else if(correct[i][0] != '-' && correct[j][0] == '-'){
+
+
+                        printf("%s is bigger than %s\n",correct[i],correct[j]);
+                            char temp[100];
+                        strcpy(temp,correct[i]);
+                        strcpy(correct[i],correct[j]);
+                        strcpy(correct[j],temp);
+
+
             }
         }
     }
