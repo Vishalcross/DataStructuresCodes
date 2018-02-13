@@ -82,7 +82,7 @@ int main(){
     for(int i=n-1;i>=0;i--){
         printf("%d ",num[i]);
     }
-
+//Alternate Solution
     /*
     for(int i=0;i<n;i++){
         for(int j=0;j<n;j++){
