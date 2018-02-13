@@ -90,23 +90,7 @@ int main(){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//Alternate Solution
     /*
     for(int i=0;i<k;i++){
         int max = b[1][i],index=i;
