@@ -1,3 +1,9 @@
+/*This question is a modification of the popular SPOJ AGGRCOWS, which makes use of the guess the answer approach. In this approach, we
+try to guess the answer with the help of binary search. For instance, if the number of friends is too high, we need to have more racks,
+on the other hand if the opposite occurs, we can find a better solution to the problem.
+@author
+Vishal Chokala
+*/
 #include<stdio.h>
 
 int main(){
