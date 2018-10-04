@@ -1,3 +1,7 @@
+/* The objective of this code is to implement a 01 knapsack, which is a standard dynamic programming algorithm
+@author 
+Vishal Chokala
+*/
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
