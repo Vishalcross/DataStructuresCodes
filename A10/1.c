@@ -1,3 +1,7 @@
+/* The objective of this code is to find the closest pair with the help of a divide and conquor algorithm
+@author
+Vishal Chokala
+*/
 #include <cstdio>
 #include <algorithm>
 #include <cmath>
